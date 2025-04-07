@@ -51,8 +51,6 @@ export  default function Navbar() {
         setIsMounted(true)
     }, [])
 
-    
-
     return (
         <nav className="fixed top-0 w-full bg-white shadow-md z-50">
             <div className="w-full bg-amber-300">
