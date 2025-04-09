@@ -5,6 +5,8 @@ import Image from "next/image"
 import Link from "next/link";
 import { PiCaretLeftBold, PiCaretRightBold } from "react-icons/pi";
 
+import CarouselCard from "./CarouselCard";
+
 const services = [
     {
         id: 1,
@@ -44,32 +46,32 @@ const services = [
 ]
 
 export default function ServicesCarousel() {
-    const [currentIndex, setCurrentIndex] = useState(0)
+    const [[currentIndex, direction], setCurrentIndex] = useState([0, 0])
     const [isAutoPlaying, setIsAutoPlaying] = useState(true)
 
     const duplicatedServices = [...services, ...services]
     const visibleCards = 2
     const startIndex = currentIndex % services.length
-    const visibleItems = duplicatedServices.slice(startIndex, startIndex + visibleCards)
+    const visibleItems = duplicatedServices.slice(startIndex, startIndex + visibleCards + 2)
 
     useEffect(() => {
         if (!isAutoPlaying) return
 
         const interval = setInterval(() => {
-            setCurrentIndex((prev) => (prev + 1) % services.length)
+            setCurrentIndex(([prev]) => [(prev + 1) % services.length, 1])
         }, 5000)
 
         return () => clearInterval(interval)
     }, [isAutoPlaying])
 
     const goToNext = () => {
-        setCurrentIndex((prev) => (prev + 1) % services.length)
+        setCurrentIndex(([prev]) => [(prev + 1) % services.length, 1])
         setIsAutoPlaying(false)
         setTimeout(() => setIsAutoPlaying(true), 10000)
     }
 
     const goToPrev = () => {
-        setCurrentIndex((prev) => (prev - 1 + services.length) % services.length)
+        setCurrentIndex(([prev]) => [(prev - 1 + services.length) % services.length, -1])
         setIsAutoPlaying(false)
         setTimeout(() => setIsAutoPlaying(true), 10000)
     }
@@ -87,7 +89,7 @@ export default function ServicesCarousel() {
                 </div>
 
                 {/* Carousel Container */}
-                <div className="relative overflow-hidden">
+                <div className="relative">
 
                     {/* Navigation Arrows */}
                     <button
@@ -106,35 +108,19 @@ export default function ServicesCarousel() {
                     </button>
                     
                     {/* Cards */}
-                    <div
-                    className="grid grid-cols-1 md:grid-cols-2 gap-8 px-8 transition-transform duration-500 ease-in-out"
-                    >
-                        {visibleItems.map((service, idx) => (
-                            <div
-                            key = {`${service.id}-${idx}`}
-                            className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-                            >
-                                <div className="relative h-48">
-                                    <Image
-                                    src={service.image}
-                                    alt={service.title}
-                                    fill
-                                    className="object-cover"
-                                    />
-                                </div>
-                                <div className="p-6">
-                                    <h3 className="text-xl font-semibold text-gray-900 mb-2">{service.title}</h3>
-                                    <p className="text-gray-600 mb-4">{service.description}</p>
-                                    <Link
-                                    href={service.readMoreLink}
-                                    className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium"
-                                    >
-                                        Read More
-                                        <PiCaretRightBold className="ml-1"/>
-                                    </Link>
-                                </div>
+                    <div className="relative h-[400px]">
+                        <AnimatePresence custom={direction} initial={false}>
+                            <div className="flex gap-8 absolute inset-0 px-8">
+                                <CarouselCard
+                                service={visibleItems[0]}
+                                direction={direction}
+                                />
+                                <CarouselCard
+                                service={visibleItems[1]}
+                                direction={direction}
+                                />
                             </div>
-                        ))}
+                        </AnimatePresence>
                     </div>
                 </div>
 
@@ -144,14 +130,15 @@ export default function ServicesCarousel() {
                         <button
                         key={idx}
                         onClick={() => {
-                            setCurrentIndex(idx)
+                            const direction = idx > currentIndex ? 1 : -1
+                            setCurrentIndex([idx, direction])
                             setIsAutoPlaying(false)
                             setTimeout(() => setIsAutoPlaying(true), 10000)
                         }}
-                        className={`w-3 h-3 rounded-full ${
-                            currentIndex % services.length === idx
-                            ? 'bg-blue-600'
-                            : 'bg-gray-300'
+                        className={`rounded-full transition-all ${
+                            idx === currentIndex || idx === (currentIndex + 1) % services.length
+                            ? 'bg-blue-600 h-3 w-3 animate-pulse'
+                            : 'bg-gray-300 w-2.5 h-2.5'
                         }`}
                         aria-label={`Go to service ${idx + 1}`}
                         />
