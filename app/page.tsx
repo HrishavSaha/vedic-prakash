@@ -1,13 +1,13 @@
 import HeroBanner from "./components/HeroBanner";
 import HomeAbout from "./components/HomeAbout";
-import Footer from "./components/Footer";
+import ServicesCarousel from "./components/ServicesCarousel";
 
 export default function Home() {
     return (
         <main className="relative">
             <HeroBanner />
             <HomeAbout />
-            <Footer />
+            <ServicesCarousel />
         </main>
     )
 }

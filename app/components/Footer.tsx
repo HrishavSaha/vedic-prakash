@@ -1,12 +1,16 @@
 'use client'
+import { useState } from "react";
 import Link from "next/link";
 import {
     PiFacebookLogoFill,
     PiInstagramLogoFill,
     PiYoutubeLogoFill,
+    PiDownloadSimpleBold,
+    PiCheckFatFill
 } from "react-icons/pi";
 
 export default function Footer() {
+    const [downloading, setDownloading] = useState<string | null>(null)
     const socials = [
         {
             id:1,
@@ -30,6 +34,13 @@ export default function Footer() {
             icon: <PiYoutubeLogoFill className="text-xl hover:text-rose-700"/>,
         }
     ]
+    const download_icon = <PiDownloadSimpleBold className="text-xl"/>
+    const downloading_icon = <PiCheckFatFill className="text-xl"/>
+
+    const handleFileDownload = (fileName: string) => {
+        setDownloading(fileName)
+        setTimeout(() => setDownloading(null), 3000)
+    }
 
     return (
         <footer className="bg-gray-900 text-gray-300 pt-16 pb-8">
@@ -101,17 +112,31 @@ export default function Footer() {
                 <div className="border-t border-gray-800 pt-4">
                     <div className="flex flex-wrap gap-20 justify-center">
                         <Link
-                            href="#"
+                            href="/downloads/hi.txt"
+                            download
+                            onClick={() => handleFileDownload('KP Brochure')}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors">
+                            className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+                                downloading === "KP Brochure"
+                                ? 'bg-green-600 text-white'
+                                : 'bg-blue-600 text-white hover:bg-blue-700'
+                            }`}>
+                            {downloading === "KP Brochure" ? downloading_icon : download_icon}
                             Download Brochure KP Astrology
                         </Link>
                         <Link
-                            href="#"
+                            href="/downloads/hi.txt"
+                            download
+                            onClick={() => handleFileDownload('Numerology Brochure')}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors">
+                            className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+                                downloading === "Numerology Brochure"
+                                ? 'bg-green-600 text-white'
+                                : 'bg-blue-600 text-white hover:bg-blue-700'
+                            }`}>
+                            {downloading === "Numerology Brochure" ? downloading_icon : download_icon}
                             Download Brochure Numerology
                         </Link>
                     </div>
