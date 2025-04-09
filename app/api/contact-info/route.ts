@@ -1,2 +1,35 @@
 import { NextResponse } from "next/server";
-import prisma from '@/lib/prisma'
+import { PrismaClient } from "@prisma/client"
+import { json } from "stream/consumers";
+const prisma = new PrismaClient()
+
+export async function GET() {
+    try {
+        const contactInfo = await prisma.contactInfo.findFirst()
+        return NextResponse.json(contactInfo)
+    } catch (error) {
+        return NextResponse.json(
+            { error: "Failed to fetch contact info" },
+            { status: 500 }
+        )
+    }
+}
+
+export async function POST(request: Request) {
+    try {
+        const { phone, email, address, mapEmbed } = await request.json()
+
+        const contactInfo = await prisma.contactInfo.upsert({
+            where: { id: 1 },
+            update: { phone, email, address, mapEmbed},
+            create: { phone, email, address, mapEmbed}
+        })
+
+        return NextResponse.json(contactInfo)
+    } catch (error) {
+        return NextResponse.json(
+            { error: "Failed to update contact info" },
+            { status: 500 }
+        )
+    }
+}
