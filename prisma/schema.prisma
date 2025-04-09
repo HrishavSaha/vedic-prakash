@@ -13,8 +13,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model  Card{
-    id              Int      @id @default(autoincrement())
-    title           String
-    content     String
+model  Card {
+    id                  Int      @id @default(autoincrement())
+    title               String
+    content         String
+}
+
+model ContactInfo {
+    id                  Int     @id @default(autoincrement())
+    phone           String
+    email            String
+    address        String
+    mapEmbed   String?
+    createdAt     DateTime  @default(now())
+    updatedAt    DateTime   @updatedAt
 }
