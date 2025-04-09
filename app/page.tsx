@@ -1,6 +1,7 @@
 import HeroBanner from "./components/HeroBanner";
 import HomeAbout from "./components/HomeAbout";
 import ServicesCarousel from "./components/ServicesCarousel";
+import ContactSection from "./components/ContactSection";
 
 export default function Home() {
     return (
@@ -8,6 +9,7 @@ export default function Home() {
             <HeroBanner />
             <HomeAbout />
             <ServicesCarousel />
+            <ContactSection />
         </main>
     )
 }
