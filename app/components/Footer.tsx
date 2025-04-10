@@ -1,5 +1,5 @@
 'use client'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
     PiFacebookLogoFill,
@@ -9,7 +9,11 @@ import {
     PiCheckFatFill
 } from "react-icons/pi";
 
+import { ContactInfo } from "@/types";
+
 export default function Footer() {
+    const [contactInfo, setContactInfo] = useState<ContactInfo | null>(null)
+    const [isLoading, setIsLoading] = useState(true)
     const [downloading, setDownloading] = useState<string | null>(null)
     const socials = [
         {
@@ -36,6 +40,22 @@ export default function Footer() {
     ]
     const download_icon = <PiDownloadSimpleBold className="text-xl"/>
     const downloading_icon = <PiCheckFatFill className="text-xl"/>
+
+    useEffect(() => {
+        const fetchContactInfo = async () => {
+            try {
+                const response = await fetch('/api/contact-info')
+                const data = await response.json()
+                setContactInfo(data)
+            } catch (error) {
+                console.error("Failed to fetch contact info", error)
+            } finally {
+                setIsLoading(false)
+            }
+        }
+
+        fetchContactInfo()
+    }, [])
 
     const handleFileDownload = (fileName: string) => {
         setDownloading(fileName)
@@ -94,8 +114,10 @@ export default function Footer() {
                     <div>
                         <h3 className="text-white text-lg font-semibold mb-4">Resources</h3>
                         <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
+                            {isLoading ?
+                            <div></div> :
                             <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.215573291865!2d-73.98784492452553!3d40.74844047138969!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b3117469%3A0xd134e199a405a163!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1712345678901"
+                                src={contactInfo?.mapEmbed}
                                 width="100%"
                                 height="200"
                                 style={{ border: 0 }}
@@ -104,6 +126,7 @@ export default function Footer() {
                                 className="rounded-lg"
                                 referrerPolicy="no-referrer-when-downgrade"
                                 ></iframe>
+                            }
                         </div>
                     </div>
                 </div>

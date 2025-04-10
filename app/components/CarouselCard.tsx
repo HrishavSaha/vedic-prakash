@@ -3,14 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { PiCaretRightBold } from "react-icons/pi";
 
+import { Service } from "@/types";
 interface CarouselCardProps {
-    service: {
-        id: number
-        title: string
-        description: string
-        image: string
-        readMoreLink: string
-    }
+    service: Service
     direction: number
 }
 

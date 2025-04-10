@@ -1,4 +1,5 @@
 'use client'
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form'
 import Link from 'next/link';
 import { 
@@ -7,8 +8,29 @@ import {
     PiMapPinFill
 } from "react-icons/pi";
 
+import { ContactInfo } from '@/types';
+
 export default function ContactSection() {
+    const [contactInfo, setContactInfo] = useState<ContactInfo | null>(null)
+    const [isLoading, setIsLoading] = useState(true)
     const { register, handleSubmit, formState: { errors } } = useForm()
+
+    useEffect(() => {
+        const fetchContactInfo = async () => {
+            try {
+                const response = await fetch('/api/contact-info')
+                const data = await response.json()
+                setContactInfo(data)
+            } catch (error) {
+                console.error("Failed to fetch contact info", error)
+            } finally {
+                setIsLoading(false)
+            }
+        }
+
+        fetchContactInfo()
+    }, [])
+
 
     const onSubmit = (data: any) => {
         console.log(data)
@@ -37,8 +59,8 @@ export default function ContactSection() {
                                     </div>
                                     <div>
                                         <h4 className='text-lg font-medium text-gray-900'>Phone</h4>
-                                        <Link href="tel:+1234567890" className='text-gray-600 hover:text-blue-600 transition-colors'>
-                                            +1 (234) 567-890
+                                        <Link href={`tel:${contactInfo?.phone || ''}`} className='text-gray-600 hover:text-blue-600 transition-colors'>
+                                            {contactInfo?.phone || "Loading Contact Number"}
                                         </Link>
                                     </div>
                                 </div>
@@ -48,8 +70,10 @@ export default function ContactSection() {
                                     </div>
                                     <div>
                                         <h4 className='text-lg font-medium text-gray-900'>Email</h4>
-                                        <Link href="mailto:info@yourcompany.com" className='text-gray-600 hover:text-blue-600 transition colors'>
-                                        info@yourcompany.com
+                                        <Link
+                                        href={`mailto:${contactInfo?.email || ''}`}
+                                        className='text-gray-600 hover:text-blue-600 transition colors'>
+                                        {contactInfo?.email || "Loading Email"}
                                         </Link>
                                     </div>
                                 </div>
@@ -61,8 +85,7 @@ export default function ContactSection() {
                                     <div>
                                         <h4 className='text-lg font-medium text-gray-900'>Address</h4>
                                         <p className='text-gray-600'>
-                                            123 Business Ave, Suite 100 <br />
-                                            San Francisco, CA 94107
+                                        {contactInfo?.address || "Loading Address"}
                                         </p>
                                     </div>
                                 </div>
@@ -71,8 +94,10 @@ export default function ContactSection() {
 
                         {/* Google Map Embed */}
                         <div className='h-64 w-full'>
+                            {isLoading ?
+                            <div></div> :
                             <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.158170833922!2d-122.41990648468236!3d37.77492997975922!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sSan%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus"
+                            src={contactInfo?.mapEmbed}
                             width="100%"
                             height="100%"
                             style={{ border: 0 }}
@@ -80,6 +105,7 @@ export default function ContactSection() {
                             loading='lazy'
                             className='rounded-b-cl'
                             ></iframe>
+                            }
                         </div>
                     </div>
 

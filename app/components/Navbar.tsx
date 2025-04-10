@@ -55,13 +55,13 @@ export  default function Navbar() {
         <nav className="fixed top-0 w-full bg-white shadow-md z-50">
             <div className="w-full bg-amber-300">
                 <div className="max-w-6xl mx-auto px-4">
-                    <div className="flex justify-between h-6">
-                        <div className="md:flex items-center space-x-8">
+                    <div className="flex justify-between sm:h-11 p-1 md:h-6">
+                        <div className="flex flex-col md:flex-row md:items-center space-x-8">
 
                             {/* Phone Number */}
                             <Link
                             href="/" 
-                            className="md:flex items-center px-3 py-auto rounded-md text-sm font-bold text-gray-700 hover:text-fuchsia-800">
+                            className="flex flex-row items-center px-3 py-auto rounded-md text-sm font-bold text-gray-700 hover:text-fuchsia-800">
                                 <PiPhoneFill className="text-xl"/>
                                 {contact_details[0]}
                             </Link>
@@ -69,12 +69,12 @@ export  default function Navbar() {
                             {/* Email ID */}
                             <Link
                             href="/" 
-                            className="md:flex items-center px-3 py-auto rounded-md text-sm font-bold text-gray-700 hover:text-fuchsia-800">
+                            className="flex flex-row items-center px-3 py-auto rounded-md text-sm font-bold text-gray-700 hover:text-fuchsia-800">
                                 <PiEnvelopeSimpleBold className="text-xl"/>
                                 {contact_details[1]}
                             </Link>
                         </div>
-                        <div className="md:flex items-center space-x-8">
+                        <div className="flex flex-col md:flex-row justify-end md:items-center md:space-x-8">
 
                             {/* Login/Register */}
                             <Link
@@ -84,16 +84,18 @@ export  default function Navbar() {
                             </Link>
 
                             {/* Socials */}
-                            {socials.map((acc) => (
-                                <Link
-                                key={`navlink-${acc.id}`}
-                                href={acc.link} 
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={`px-auto py-auto rounded-xl  text-gray-700`}>
-                                    {acc.icon}
-                                </Link>
-                            ))}
+                            <div className="flex flex-row justify-end md:items-center space-x-2 pr-2">
+                                {socials.map((acc) => (
+                                    <Link
+                                    key={`navlink-${acc.id}`}
+                                    href={acc.link} 
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={`px-auto py-auto rounded-xl text-gray-700`}>
+                                        {acc.icon}
+                                    </Link>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>

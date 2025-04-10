@@ -14,23 +14,3 @@ export async function GET() {
         )
     }
 }
-
-export async function POST(request: Request) {
-    try {
-        const { phone, email, address, mapEmbed } = await request.json()
-
-        const contactInfo = await prisma.contactInfo.upsert({
-            where: { id: 1 },
-            update: { phone, email, address, mapEmbed},
-            create: { phone, email, address, mapEmbed}
-        })
-
-        return NextResponse.json(contactInfo)
-    } catch (error) {
-        console.log(error)
-        return NextResponse.json(
-            { error: "Failed to update contact info" },
-            { status: 500 }
-        )
-    }
-}

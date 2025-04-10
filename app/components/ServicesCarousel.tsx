@@ -1,11 +1,11 @@
 'use client'
 import { useState, useEffect } from "react"
-import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image"
-import Link from "next/link";
+import { AnimatePresence } from "framer-motion";
+import {useMediaQuery} from "react-responsive";
 import { PiCaretLeftBold, PiCaretRightBold } from "react-icons/pi";
 
 import CarouselCard from "./CarouselCard";
+import { Service } from "@/types";
 
 const services = [
     {
@@ -49,10 +49,16 @@ export default function ServicesCarousel() {
     const [[currentIndex, direction], setCurrentIndex] = useState([0, 0])
     const [isAutoPlaying, setIsAutoPlaying] = useState(true)
 
+    const isMobile = useMediaQuery( { maxWidth: 768 } )
     const duplicatedServices = [...services, ...services]
-    const visibleCards = 2
+    const visibleCards = isMobile ? 1 : 2
     const startIndex = currentIndex % services.length
     const visibleItems = duplicatedServices.slice(startIndex, startIndex + visibleCards + 2)
+
+    const visibleServices: Service[] = []
+    for (let i = 0; i < visibleCards; i++) {
+        visibleServices.push(services[(currentIndex + i) % services.length])
+    }
 
     useEffect(() => {
         if (!isAutoPlaying) return
@@ -111,14 +117,13 @@ export default function ServicesCarousel() {
                     <div className="relative h-[400px]">
                         <AnimatePresence custom={direction} initial={false}>
                             <div className="flex gap-8 absolute inset-0 px-8">
-                                <CarouselCard
-                                service={visibleItems[0]}
-                                direction={direction}
-                                />
-                                <CarouselCard
-                                service={visibleItems[1]}
-                                direction={direction}
-                                />
+                                {visibleServices.map((service, index) => (
+                                    <CarouselCard
+                                    key={`${service.id}-${currentIndex}`}
+                                    service={service}
+                                    direction={direction}
+                                    />
+                                ))}
                             </div>
                         </AnimatePresence>
                     </div>
@@ -136,7 +141,7 @@ export default function ServicesCarousel() {
                             setTimeout(() => setIsAutoPlaying(true), 10000)
                         }}
                         className={`rounded-full transition-all ${
-                            idx === currentIndex || idx === (currentIndex + 1) % services.length
+                            ((idx === currentIndex || idx === (currentIndex + 1) % services.length) && !isMobile) || (idx === currentIndex && isMobile)
                             ? 'bg-blue-600 h-3 w-3 animate-pulse'
                             : 'bg-gray-300 w-2.5 h-2.5'
                         }`}
