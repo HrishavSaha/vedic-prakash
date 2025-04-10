@@ -9,7 +9,10 @@ export async function GET() {
     } catch (error) {
         console.log(error)
         return NextResponse.json(
-            { error: "Failed to fetch contact info" },
+            {
+                error: "Failed to fetch contact info",
+                message: error
+             },
             { status: 500 }
         )
     }
