@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client"
-import { json } from "stream/consumers";
 const prisma = new PrismaClient()
 
 export async function GET() {
@@ -8,6 +7,7 @@ export async function GET() {
         const contactInfo = await prisma.contactInfo.findFirst()
         return NextResponse.json(contactInfo)
     } catch (error) {
+        console.log(error)
         return NextResponse.json(
             { error: "Failed to fetch contact info" },
             { status: 500 }
@@ -27,6 +27,7 @@ export async function POST(request: Request) {
 
         return NextResponse.json(contactInfo)
     } catch (error) {
+        console.log(error)
         return NextResponse.json(
             { error: "Failed to update contact info" },
             { status: 500 }
