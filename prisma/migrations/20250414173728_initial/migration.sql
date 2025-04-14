@@ -1,4 +1,13 @@
 -- CreateTable
+CREATE TABLE "Card" (
+    "id" SERIAL NOT NULL,
+    "title" TEXT NOT NULL,
+    "content" TEXT NOT NULL,
+
+    CONSTRAINT "Card_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "ContactInfo" (
     "id" SERIAL NOT NULL,
     "phone" TEXT NOT NULL,
