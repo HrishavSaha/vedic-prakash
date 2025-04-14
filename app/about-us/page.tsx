@@ -8,8 +8,7 @@ export default function AboutUsPage() {
             path={[
                 {name: "Home", url: "/"},
                 {name: "About Us", url: "/about-us"}
-            ]}
-            />
+            ]}/>
         </main>
     )
 }
