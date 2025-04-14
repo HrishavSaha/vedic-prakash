@@ -51,7 +51,7 @@ export default function ServicesCarousel() {
 
     const isMobile = useMediaQuery( { maxWidth: 768 } )
     const duplicatedServices = [...services, ...services]
-    const visibleCards = isMobile ? 1 : 2
+    const visibleCards = isMobile ? 1 : 3
     const startIndex = currentIndex % services.length
     const visibleItems = duplicatedServices.slice(startIndex, startIndex + visibleCards + 2)
 
@@ -116,7 +116,7 @@ export default function ServicesCarousel() {
                     {/* Cards */}
                     <div className="relative h-[400px]">
                         <AnimatePresence custom={direction} initial={false}>
-                            <div className="flex gap-8 absolute inset-0 px-8">
+                            <div className="flex gap-8 absolute inset-0 px-10">
                                 {visibleServices.map((service, index) => (
                                     <CarouselCard
                                     key={`${service.id}-${currentIndex}`}
@@ -141,7 +141,7 @@ export default function ServicesCarousel() {
                             setTimeout(() => setIsAutoPlaying(true), 10000)
                         }}
                         className={`rounded-full transition-all ${
-                            ((idx === currentIndex || idx === (currentIndex + 1) % services.length) && !isMobile) || (idx === currentIndex && isMobile)
+                            ((idx === currentIndex || idx === (currentIndex + 1) % services.length  || idx === (currentIndex + 2) % services.length) && !isMobile) || (idx === currentIndex && isMobile)
                             ? 'bg-blue-600 h-3 w-3 animate-pulse'
                             : 'bg-gray-300 w-2.5 h-2.5'
                         }`}

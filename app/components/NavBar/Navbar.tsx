@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { useMediaQuery } from "react-responsive";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -15,6 +16,7 @@ export  default function Navbar() {
     const pathname = usePathname()
     const [isMounted, setIsMounted] = useState(false)
     
+    const isMobile = useMediaQuery( { maxWidth: 768 } )
     const contact_details = ["+91 8423323232", "vedic.prakash@gmail.com"]
     const navLinks = [
         { name: "Home", path: "/" },
@@ -101,10 +103,18 @@ export  default function Navbar() {
                 </div>
             </div>
             <div className="max-w-6xl mx-auto px-4">
-                <div className="flex justify-between h-16">
+                <div className={`flex h-16 ${
+                        isMobile
+                        ? 'justify-center'
+                        : 'justify-between'
+                    }`}>
 
                     {/* Logo */}
-                    <Link href="/" className="flex items-center">
+                    <Link href="/" className={`items-center ${
+                        isMobile
+                        ? 'hidden'
+                        : 'flex'
+                    }`}>
                         <Image
                         src="/images/navbar_logo.png"
                         alt="Vedic Prakash"
@@ -116,12 +126,16 @@ export  default function Navbar() {
                     </Link>
 
                     {/* Navigation Menu*/}
-                    <div className="md:flex items-center space-x-8">
+                    <div className={`flex items-center ${
+                        isMobile
+                        ? ''
+                        : 'space-x-8'
+                    }`}>
                         {navLinks.map((link) => (
                             <Link
                             key={link.path}
                             href={link.path}
-                            className={`px-3 py-2 rounded-md text-sm font-bold ${
+                            className={`px-2 py-2 rounded-md text-sm font-bold ${
                                 isMounted && pathname === link.path
                                 ? 'text-fuchsia-700 '
                                 : 'text-neutral-700 hover:bg-gray-100'

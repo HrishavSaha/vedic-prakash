@@ -103,6 +103,7 @@ export default function ContactSection() {
                             style={{ border: 0 }}
                             allowFullScreen
                             loading='lazy'
+                            referrerPolicy='no-referrer-when-downgrade'
                             className='rounded-b-cl'
                             ></iframe>
                             }

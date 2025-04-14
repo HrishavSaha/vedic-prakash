@@ -10,13 +10,14 @@ interface CarouselCardProps {
 }
 
 export default function CarouselCard({ service, direction }: CarouselCardProps) {
+    const x_drift = 50
     return (
         <motion.div
         key = {service.id}
         custom={direction}
         initial={{
             opacity: 0,
-            x: direction === 1 ? 100 : -100
+            x: direction === 1 ? x_drift : -x_drift
         }}
         animate={{
             opacity: 1,

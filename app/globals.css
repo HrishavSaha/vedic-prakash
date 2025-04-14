@@ -1,7 +1,9 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+@utility debug {
+    border: 1px solid red
+}
 
 @theme inline {
   --color-background: var(--background);
