@@ -34,7 +34,7 @@ export default function Header({ heading, path }: HeaderProps) {
                 <div>
                     {path.map((elem, index, arr) => (
                         <Link
-                        id={`${elem.url}-${index}`}
+                        key={`${elem.url}-${index}`}
                         href={elem.url}
                         className="max-w-2xl text-2xl "
                         >{elem.name}{index !== (path.length - 1) ? " / " : "" }</Link>
