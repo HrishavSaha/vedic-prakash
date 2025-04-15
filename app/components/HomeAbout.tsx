@@ -15,7 +15,7 @@ export default function HomeAbout() {
                     <div className="relative w-full max-w-md aspect-square rounded-2xl overflow-hidden shadow-xl">
                         <Image
                         src="/globe.svg"
-                        alt="Sanjay Tiwari"
+                        alt="Sanjiv Tiwari"
                         fill
                         className="object-cover"
                         priority
@@ -25,19 +25,16 @@ export default function HomeAbout() {
                     {/* Content */}
                     <div className="flex-1 space-y-6">
                         <h2 className="text-3xl font-bold md:text-4xl">
-                            Hi, I'm Sanjay Tiwari
+                            Hi, I'm Sanjiv Tiwari
                         </h2>
 
                         <p className="text-lg text-gray-600">
-                        With over 10 years of experience in web development, I founded this company to deliver 
-                        exceptional digital solutions. My passion for clean code and user-centric design drives 
-                        every project.
+                        Sanjiv Tiwari is a versatile individual with a diverse educational background and professional experience that shape his unique approach to occult subjects like Vedic Astrology, Vedic Numerology, and Vedic Vastu. He holds a Bachelor’s degree in Commerce and a Master’s in Business Administration (MBA) specializing in Materials Management, giving him a broad knowledge base in analytical and managerial domains. Throughout his career, he has worked with esteemed organizations like ACC and Ambuja Cement in roles involving research, development, and analytical processes.
                         </p>
 
                         <div className="space-y-4">
                             <p className="text-lg text-gray-600">
-                            Previously lead developer at TechCorp, I've helped over 50 clients transform their 
-                            online presence. My expertise spans React, Node.js, and cloud architecture.
+                            Sanjiv Tiwari has a true passion for Vedic sciences, especially Astrology, Numerology, and Vastu. Fascinated by ancient wisdom, he systematically explores these occult disciplines, dedicating himself to unraveling their mysteries through expertise and exploration.
                             </p>
 
                             {/* Collapsible Content */}
@@ -45,9 +42,10 @@ export default function HomeAbout() {
                                 isExpanded ? 'max-h-[500px]' : 'max-h-0'
                             }`}>
                                 <p className="pb-4 text-gray-600">
-                                When I'm not coding, you'll find me mentoring at local bootcamps or hiking with my 
-                                golden retriever. I believe technology should empower businesses while maintaining 
-                                human connection.
+                                He has earned a reputation as a renowned astrologer, offering insightful guidance and accurate predictions. His expertise enables him to analyze planetary positions, numbers in individuals’ lives, and Vastu directions, providing advice on relationships, career, health, and personal growth. His process interprets celestial bodies, zodiac signs, and planetary movements to deliver valuable insights into various life aspects. His specialized teachings highlight the interconnectedness of cosmic energies and their impact on well-being, empowering individuals to align with positive energies, make informed choices, and face life’s challenges confidently.
+                                </p>
+                                <p className="pb-4 text-gray-600">
+                                In summary, Sanjiv Tiwari is an expert astrologer who blends technical skills with a deep understanding of occult sciences. His passion for unraveling Vedic secrets and sharing insights for individuals’ betterment reflects his commitment to holistic well-being and personal growth.
                                 </p>
                             </div>
 

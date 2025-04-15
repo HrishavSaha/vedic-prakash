@@ -104,7 +104,7 @@ export  default function Navbar() {
             </div>
             <div className="max-w-6xl mx-auto px-4">
                 <div className={`flex h-16 ${
-                        isMobile
+                        isMobile && isMounted
                         ? 'justify-center'
                         : 'justify-between'
                     }`}>

@@ -10,38 +10,24 @@ import { Service } from "@/types";
 const services = [
     {
         id: 1,
-        title: "Web Development",
-        description: "Custom websites built with modern technologies for optimal performance.",
+        title: "Astrology",
+        description: "Astrology is a range of divinatory practices, recognized as pseudoscientific since the 18th century, that propose that information about human affairs and terrestrial events may be discerned by studying the apparent positions of celestial objects.",
         image: "/globe.svg",
-        readMoreLink: '/services/web-development'
+        readMoreLink: '/services/astrology'
     },
     {
         id: 2,
-        title: "Mobile Apps",
-        description: "Custom websites built with modern technologies for optimal performance.",
+        title: "Numerology",
+        description: "Numerology is the study of the mystical relationship between numbers and events, often used to gain insights into personality traits, life paths, and potential future events. It involves assigning numerical values to letters in names and dates and interpreting the resulting numbers to understand a person's core essence.",
         image: "/globe.svg",
-        readMoreLink: '/services/web-development'
+        readMoreLink: '/services/numerology'
     },
     {
         id: 3,
-        title: "UI/UX Design",
-        description: "Custom websites built with modern technologies for optimal performance.",
+        title: "Vastu Shastra",
+        description: "Vastu Shastra is the shastra of rules and regulations laid down to live in harmony with the nature and its energies. If we dwell in accordance to the natural laws we are bound to be successful in every sphere of life.",
         image: "/globe.svg",
-        readMoreLink: '/services/web-development'
-    },
-    {
-        id: 4,
-        title: "Cloud Solutions",
-        description: "Custom websites built with modern technologies for optimal performance.",
-        image: "/globe.svg",
-        readMoreLink: '/services/web-development'
-    },
-    {
-        id: 5,
-        title: "Digital Marketing",
-        description: "Custom websites built with modern technologies for optimal performance.",
-        image: "/globe.svg",
-        readMoreLink: '/services/web-development'
+        readMoreLink: '/services/vastu-shastra'
     },
 ]
 
@@ -61,6 +47,7 @@ export default function ServicesCarousel() {
     }
 
     useEffect(() => {
+        if (!isMobile) return
         if (!isAutoPlaying) return
 
         const interval = setInterval(() => {
@@ -90,7 +77,7 @@ export default function ServicesCarousel() {
                 <div className="text-center mb-12">
                     <h2 className="text-3xl font-bold text-gray-900 mb-2">Our Services</h2>
                     <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                        Professional solutions tailored to your business needs
+                        Professional solutions tailored to your needs
                     </p>
                 </div>
 
@@ -100,14 +87,14 @@ export default function ServicesCarousel() {
                     {/* Navigation Arrows */}
                     <button
                     onClick={goToPrev}
-                    className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors"
+                    className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors md:hidden"
                     aria-label="Previous services"
                     >
                         <PiCaretLeftBold className="w-6 h-6 text-gray-700" />
                     </button>
                     <button
                     onClick={goToNext}
-                    className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors"
+                    className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors md:hidden"
                     aria-label="Next services"
                     >
                         <PiCaretRightBold className="w-6 h-6 text-gray-700" />
@@ -130,7 +117,7 @@ export default function ServicesCarousel() {
                 </div>
 
                 {/* Dots Indicator */}
-                <div className="flex justify-center mt-8 gap-2">
+                <div className="flex justify-center mt-8 gap-2 md:hidden">
                     {services.map((_, idx) => (
                         <button
                         key={idx}
