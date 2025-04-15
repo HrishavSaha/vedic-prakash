@@ -29,7 +29,7 @@ export default function Header({ heading, path }: HeaderProps) {
             </div>
 
             {/* Heading */}
-            <div className="container z-10 relative h-full mx-auto flex flex-col justify-center items-center text-white">
+            <div className="container z-10 relative h-full mx-auto flex flex-col justify-center items-center gap-4 text-white">
                 <h1 className="max-w-2xl text-2xl">{heading}</h1>
                 <div>
                     {path.map((elem, index, arr) => (
