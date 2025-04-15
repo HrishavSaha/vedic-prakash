@@ -101,7 +101,7 @@ export default function ServicesCarousel() {
                     </button>
                     
                     {/* Cards */}
-                    <div className="relative h-[400px]">
+                    <div className="relative h-[500px]">
                         <AnimatePresence custom={direction} initial={false}>
                             <div className="flex gap-8 absolute inset-0 px-10">
                                 {visibleServices.map((service, index) => (

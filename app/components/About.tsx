@@ -3,7 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
-export default function HomeAbout() {
+export default function About() {
     const [isExpanded, setIsExpanded] = useState(false)
 
     return (
