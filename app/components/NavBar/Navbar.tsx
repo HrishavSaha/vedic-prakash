@@ -111,7 +111,7 @@ export  default function Navbar() {
 
                     {/* Logo */}
                     <Link href="/" className={`items-center ${
-                        isMobile
+                        isMobile && isMounted
                         ? 'hidden'
                         : 'flex'
                     }`}>
@@ -127,7 +127,7 @@ export  default function Navbar() {
 
                     {/* Navigation Menu*/}
                     <div className={`flex items-center ${
-                        isMobile
+                        isMobile && isMounted
                         ? ''
                         : 'space-x-8'
                     }`}>
