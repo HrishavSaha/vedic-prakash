@@ -1,7 +1,7 @@
 import { Metadata } from "next";
-import Navbar from "./components/NavBar/Navbar";
-import Footer from "./components/Footer";
-import "./globals.css";
+import Navbar from "@/app/components/Navbar";
+import Footer from "@/app/components/Footer";
+import "@/app/globals.css";
 
 export const metadata: Metadata = {
     title: "Vedic Prakash"

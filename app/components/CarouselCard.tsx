@@ -3,14 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { PiCaretRightBold } from "react-icons/pi";
 
-import { Service } from "@/types";
-interface CarouselCardProps {
-    service: Service
-    direction: number
-}
+import { CarouselCardProps } from "@/types";
 
 export default function CarouselCard({ service, direction }: CarouselCardProps) {
     const x_drift = 50
+    
     return (
         <motion.div
         key = {service.id}

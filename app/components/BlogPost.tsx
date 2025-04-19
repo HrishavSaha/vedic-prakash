@@ -1,33 +1,17 @@
 'use client'
 import { useState, useEffect } from "react"
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
 
 import { PiCaretDownBold, PiCaretUpBold } from "react-icons/pi"
 
-const blogs = [
-    {
-        title: "Manglik Dosha in Astrology",
-        content: "Manglik Dosha, also known as Mangal Dosha or Kuja Dosha, is identified in a natal chart, particularly for marriage compatibility and Kundali matching. This astrological flaw arises from the placement of Mars in the chart, depending on its strength and degree."
-    }, 
-    {
-        title: "How to Determine Manglik Dosha?",
-        content: "Manglik Dosha occurs when Mars is in the 1st, 2nd, 4th, 7th, 8th, or 12th house of the natal chart. Mars' presence or aspect in these houses affects relationships, often causing extreme anger in the individual, leading to marriage and relationship issues."
-    }, 
-    {
-        title: "The Influence of Mars",
-        content: "Mars is linked to energy, assertiveness, passion, and aggression. When positioned in the mentioned houses, these traits may manifest in the person’s personality, impacting marital interactions. Potential negative effects include conflict in relationships, delayed marriage, marital challenges and health issues."
-    },
-    {
-        title: "Remedies for Manglik Dosha",
-        content: "Manglik Dosha can cause problems, especially during Mars’ Mahadasha or Antardasha. Common remedies to reduce its negative effects include Mangal Dosha Nivaran Pooja, wearing a coral gemstone, fasting on tuesdays, offering chola to Hanuman Temple on Thursdays, donating red items on tuesdays, chanting Hanuman Chalisa daily."
-    },
-]
+import { siteData } from "@/types/site-data"
 
 export default function BlogPost () {
     const [isExpanded, setIsExpanded] = useState(false)
     const [currentBlog, setCurrentBlog] = useState<number | null>(null)
     const [isClient, setIsClient] = useState(false)
+
+    const blogs = siteData.blogs
 
     useEffect(() => {
         setIsClient(true)

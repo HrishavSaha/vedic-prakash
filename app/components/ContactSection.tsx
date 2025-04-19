@@ -8,29 +8,12 @@ import {
     PiMapPinFill
 } from "react-icons/pi";
 
-import { ContactInfo } from '@/types';
+import { siteData } from '@/types/site-data';
 
 export default function ContactSection() {
-    const [contactInfo, setContactInfo] = useState<ContactInfo | null>(null)
-    const [isLoading, setIsLoading] = useState(true)
     const { register, handleSubmit, formState: { errors } } = useForm()
 
-    useEffect(() => {
-        const fetchContactInfo = async () => {
-            try {
-                const response = await fetch('/api/contact-info')
-                const data = await response.json()
-                setContactInfo(data)
-            } catch (error) {
-                console.error("Failed to fetch contact info", error)
-            } finally {
-                setIsLoading(false)
-            }
-        }
-
-        fetchContactInfo()
-    }, [])
-
+    const contactInfo = siteData.contactInfo;
 
     const onSubmit = (data: any) => {
         console.log(data)
@@ -59,8 +42,8 @@ export default function ContactSection() {
                                     </div>
                                     <div>
                                         <h4 className='text-lg font-medium text-gray-900'>Phone</h4>
-                                        <Link href={`tel:${contactInfo?.phone || ''}`} className='text-gray-600 hover:text-blue-600 transition-colors'>
-                                            {contactInfo?.phone || "Loading Contact Number"}
+                                        <Link href={`tel:${contactInfo.phone}`} className='text-gray-600 hover:text-blue-600 transition-colors'>
+                                            {contactInfo.phone}
                                         </Link>
                                     </div>
                                 </div>
@@ -71,9 +54,9 @@ export default function ContactSection() {
                                     <div>
                                         <h4 className='text-lg font-medium text-gray-900'>Email</h4>
                                         <Link
-                                        href={`mailto:${contactInfo?.email || ''}`}
+                                        href={`mailto:${contactInfo.email}`}
                                         className='text-gray-600 hover:text-blue-600 transition colors'>
-                                        {contactInfo?.email || "Loading Email"}
+                                        {contactInfo.email}
                                         </Link>
                                     </div>
                                 </div>
@@ -85,7 +68,7 @@ export default function ContactSection() {
                                     <div>
                                         <h4 className='text-lg font-medium text-gray-900'>Address</h4>
                                         <p className='text-gray-600'>
-                                        {contactInfo?.address || "Loading Address"}
+                                        {contactInfo.address}
                                         </p>
                                     </div>
                                 </div>
@@ -94,10 +77,8 @@ export default function ContactSection() {
 
                         {/* Google Map Embed */}
                         <div className='h-64 w-full'>
-                            {isLoading ?
-                            <div></div> :
                             <iframe
-                            src={contactInfo?.mapEmbed}
+                            src={contactInfo.mapEmbed}
                             width="100%"
                             height="100%"
                             style={{ border: 0 }}
@@ -106,7 +87,6 @@ export default function ContactSection() {
                             referrerPolicy='no-referrer-when-downgrade'
                             className='rounded-b-cl'
                             ></iframe>
-                            }
                         </div>
                     </div>
 

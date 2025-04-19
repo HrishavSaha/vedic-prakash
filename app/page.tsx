@@ -1,7 +1,7 @@
-import HeroBanner from "./components/HeroBanner";
-import About from "./components/About";
-import ServicesCarousel from "./components/ServicesCarousel";
-import ContactSection from "./components/ContactSection";
+import HeroBanner from "@/app/components/HeroBanner";
+import About from "@/app/components/About";
+import ServicesCarousel from "@/app/components/ServicesCarousel";
+import ContactSection from "@/app/components/ContactSection";
 
 export default function Home() {
     return (

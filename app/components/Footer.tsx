@@ -2,60 +2,20 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
-    PiFacebookLogoFill,
-    PiInstagramLogoFill,
-    PiYoutubeLogoFill,
     PiDownloadSimpleBold,
     PiCheckFatFill
 } from "react-icons/pi";
 
-import { ContactInfo } from "@/types";
+import { siteData } from "@/types/site-data";
 
 export default function Footer() {
-    const [contactInfo, setContactInfo] = useState<ContactInfo | null>(null)
-    const [isLoading, setIsLoading] = useState(true)
     const [downloading, setDownloading] = useState<string | null>(null)
-    const socials = [
-        {
-            id:1,
-            name: "Facebook",
-            link: "https://facebook.com",
-            color: "blue-700",
-            icon: <PiFacebookLogoFill className="text-xl hover:text-blue-700"/>,
-        },
-        {
-            id:2,
-            name: "Instagram",
-            link: "https://instagram.com",
-            color: "pink-700",
-            icon: <PiInstagramLogoFill className="text-xl hover:text-pink-500"/>,
-        },
-        {
-            id:3,
-            name: "Youtube",
-            link: "https://youtube.com",
-            color: "rose-700",
-            icon: <PiYoutubeLogoFill className="text-xl hover:text-rose-700"/>,
-        }
-    ]
+    
+    const socials = siteData.socials
+    const contactInfo = siteData.contactInfo
+    const footerSections = siteData.footerSections
     const download_icon = <PiDownloadSimpleBold className="text-xl"/>
     const downloading_icon = <PiCheckFatFill className="text-xl"/>
-
-    useEffect(() => {
-        const fetchContactInfo = async () => {
-            try {
-                const response = await fetch('/api/contact-info')
-                const data = await response.json()
-                setContactInfo(data)
-            } catch (error) {
-                console.error("Failed to fetch contact info", error)
-            } finally {
-                setIsLoading(false)
-            }
-        }
-
-        fetchContactInfo()
-    }, [])
 
     const handleFileDownload = (fileName: string) => {
         setDownloading(fileName)
@@ -75,49 +35,39 @@ export default function Footer() {
                         "Building digital experiences that matter."
                         </blockquote>
                         <div className="flex space-x-4">
-                            {socials.map((acc) => (
+                            {socials.map((acc) => {
+                                const Icon = acc.icon
+                                return (
                                 <Link
                                 key={`navlink-${acc.id}`}
                                 href={acc.link} 
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className={`px-auto py-auto rounded-xl  text-gray-300`}>
-                                    {acc.icon}
+                                className={`px-auto py-auto rounded-xl text-gray-300`}>
+                                    <Icon className={`text-xl hover:text-${acc.color}`} />
                                 </Link>
-                            ))}
+                            )})}
                         </div>
                     </div>
 
-                    {/* Column 2: Quick Links */}
-                    <div>
-                        <h3 className="text-white text-lg font-semibold mb-4">Quick Links</h3>
-                        <ul className="space-y-2">
-                            <li><a href="#" className="hover:text-white transition-colors">Home</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Services</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
-                        </ul>
-                    </div>
-
-                    {/* Column 3: Resources */}
-                    <div>
-                        <h3 className="text-white text-lg font-semibold mb-4">Resources</h3>
-                        <ul className="space-y-2">
-                            <li><a href="/resources/blog" className="hover:text-white transition-colors">Blog</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Documentation</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">FAQ</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Support</a></li>
-                        </ul>
-                    </div>
+                    {/* Column 2 & 3: Quick Links & Resources */}
+                    {footerSections.map((section) => (
+                        <div key={section.title}>
+                            <h3 className="text-white text-lg font-semibold mb-4">{section.title}</h3>
+                            <ul className="space-y-2">
+                                {section.footerlinks.map((link) => (
+                                    <li key={link.name}><a href={link.path} className="hover:text-white transition-colors">{link.name}</a></li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
 
                     {/* Column 4: Location Map */}
                     <div>
                         <h3 className="text-white text-lg font-semibold mb-4">Resources</h3>
                         <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
-                            {isLoading ?
-                            <div></div> :
                             <iframe
-                                src={contactInfo?.mapEmbed}
+                                src={contactInfo.mapEmbed}
                                 width="100%"
                                 height="200"
                                 style={{ border: 0 }}
@@ -125,8 +75,7 @@ export default function Footer() {
                                 loading="lazy"
                                 className="rounded-lg"
                                 referrerPolicy="no-referrer-when-downgrade"
-                                ></iframe>
-                            }
+                            ></iframe>
                         </div>
                     </div>
                 </div>
@@ -145,7 +94,9 @@ export default function Footer() {
                                 ? 'bg-green-600 text-white'
                                 : 'bg-blue-600 text-white hover:bg-blue-700'
                             }`}>
-                            {downloading === "KP Brochure" ? downloading_icon : download_icon}
+                            {downloading === "KP Brochure" ?
+                            downloading_icon :
+                            download_icon}
                             Download Brochure KP Astrology
                         </Link>
                         <Link
@@ -159,7 +110,9 @@ export default function Footer() {
                                 ? 'bg-green-600 text-white'
                                 : 'bg-blue-600 text-white hover:bg-blue-700'
                             }`}>
-                            {downloading === "Numerology Brochure" ? downloading_icon : download_icon}
+                            {downloading === "Numerology Brochure" ?
+                            downloading_icon :
+                            download_icon}
                             Download Brochure Numerology
                         </Link>
                     </div>

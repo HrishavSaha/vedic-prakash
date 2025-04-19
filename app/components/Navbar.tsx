@@ -7,47 +7,19 @@ import Image from "next/image";
 import {
     PiPhoneFill,
     PiEnvelopeSimpleBold,
-    PiFacebookLogoFill,
-    PiInstagramLogoFill,
-    PiYoutubeLogoFill,
 } from "react-icons/pi";
 
+import { siteData } from "@/types/site-data";
+
 export  default function Navbar() {
-    const pathname = usePathname()
     const [isMounted, setIsMounted] = useState(false)
-    
+    const pathname = usePathname()
     const isMobile = useMediaQuery( { maxWidth: 768 } )
-    const contact_details = ["+91 8423323232", "vedic.prakash@gmail.com"]
-    const navLinks = [
-        { name: "Home", path: "/" },
-        { name: "About Us", path: "/about-us" },
-        { name: "Our Services", path: "/services" },
-        { name: "Contact Us", path: "/contact-us" },
-    ]
+    
+    const contactInfo = siteData.contactInfo
+    const socials = siteData.socials
+    const navLinks = siteData.navLinks
     const login_register = {name: "Login/Register", path: "/login"}
-    const socials = [
-        {
-            id:1,
-            name: "Facebook",
-            link: "https://facebook.com",
-            color: "blue-700",
-            icon: <PiFacebookLogoFill className="text-xl hover:text-blue-700"/>,
-        },
-        {
-            id:2,
-            name: "Instagram",
-            link: "https://instagram.com",
-            color: "pink-700",
-            icon: <PiInstagramLogoFill className="text-xl hover:text-pink-500"/>,
-        },
-        {
-            id:3,
-            name: "Youtube",
-            link: "https://youtube.com",
-            color: "rose-700",
-            icon: <PiYoutubeLogoFill className="text-xl hover:text-rose-700"/>,
-        }
-    ]
 
     useEffect(() => {
         setIsMounted(true)
@@ -62,18 +34,18 @@ export  default function Navbar() {
 
                             {/* Phone Number */}
                             <Link
-                            href="/" 
+                            href={`tel:${contactInfo.phone}`}
                             className="flex flex-row items-center px-3 py-auto rounded-md text-sm font-bold text-gray-700 hover:text-fuchsia-800">
                                 <PiPhoneFill className="text-xl"/>
-                                {contact_details[0]}
+                                {contactInfo.phone}
                             </Link>
 
                             {/* Email ID */}
                             <Link
-                            href="/" 
+                            href={`mailto:${contactInfo.email}`}
                             className="flex flex-row items-center px-3 py-auto rounded-md text-sm font-bold text-gray-700 hover:text-fuchsia-800">
                                 <PiEnvelopeSimpleBold className="text-xl"/>
-                                {contact_details[1]}
+                                {contactInfo.email}
                             </Link>
                         </div>
                         <div className="flex flex-col md:flex-row justify-end md:items-center md:space-x-8">
@@ -87,16 +59,18 @@ export  default function Navbar() {
 
                             {/* Socials */}
                             <div className="flex flex-row justify-end md:items-center space-x-2 pr-2">
-                                {socials.map((acc) => (
+                                {socials.map((acc) => {
+                                    const Icon = acc.icon
+                                    return (
                                     <Link
                                     key={`navlink-${acc.id}`}
                                     href={acc.link} 
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className={`px-auto py-auto rounded-xl text-gray-700`}>
-                                        {acc.icon}
+                                        <Icon className={`text-xl hover:text-${acc.color}`} />
                                     </Link>
-                                ))}
+                                )})}
                             </div>
                         </div>
                     </div>

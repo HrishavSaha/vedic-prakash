@@ -4,44 +4,19 @@ import { AnimatePresence } from "framer-motion";
 import {useMediaQuery} from "react-responsive";
 import { PiCaretLeftBold, PiCaretRightBold } from "react-icons/pi";
 
-import CarouselCard from "./CarouselCard";
-import { Service } from "@/types";
+import { siteData } from "@/types/site-data";
+import CarouselCard from "@/app/components/CarouselCard";
 
-const services = [
-    {
-        id: 1,
-        title: "Astrology",
-        description: "Astrology is a range of divinatory practices, recognized as pseudoscientific since the 18th century, that propose that information about human affairs and terrestrial events may be discerned by studying the apparent positions of celestial objects.",
-        image: "/globe.svg",
-        readMoreLink: '/services/astrology'
-    },
-    {
-        id: 2,
-        title: "Numerology",
-        description: "Numerology is the study of the mystical relationship between numbers and events, often used to gain insights into personality traits, life paths, and potential future events. It involves assigning numerical values to letters in names and dates and interpreting the resulting numbers to understand a person's core essence.",
-        image: "/globe.svg",
-        readMoreLink: '/services/numerology'
-    },
-    {
-        id: 3,
-        title: "Vastu Shastra",
-        description: "Vastu Shastra is the shastra of rules and regulations laid down to live in harmony with the nature and its energies. If we dwell in accordance to the natural laws we are bound to be successful in every sphere of life.",
-        image: "/globe.svg",
-        readMoreLink: '/services/vastu-shastra'
-    },
-]
+const services = siteData.services
 
 export default function ServicesCarousel() {
     const [[currentIndex, direction], setCurrentIndex] = useState([0, 0])
     const [isAutoPlaying, setIsAutoPlaying] = useState(true)
 
     const isMobile = useMediaQuery( { maxWidth: 768 } )
-    const duplicatedServices = [...services, ...services]
     const visibleCards = isMobile ? 1 : 3
-    const startIndex = currentIndex % services.length
-    const visibleItems = duplicatedServices.slice(startIndex, startIndex + visibleCards + 2)
 
-    const visibleServices: Service[] = []
+    const visibleServices: typeof services = []
     for (let i = 0; i < visibleCards; i++) {
         visibleServices.push(services[(currentIndex + i) % services.length])
     }
@@ -104,7 +79,7 @@ export default function ServicesCarousel() {
                     <div className="relative h-[500px]">
                         <AnimatePresence custom={direction} initial={false}>
                             <div className="flex gap-8 absolute inset-0 px-10">
-                                {visibleServices.map((service, index) => (
+                                {visibleServices.map((service) => (
                                     <CarouselCard
                                     key={`${service.id}-${currentIndex}`}
                                     service={service}

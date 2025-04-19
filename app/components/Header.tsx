@@ -1,15 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 
-type Path = {
-    name: string
-    url: string
-}
-
-interface HeaderProps {
-    heading: string
-    path: Array<Path>
-}
+import { HeaderProps } from "@/types"
 
 export default function Header({ heading, path }: HeaderProps) {
     return (
