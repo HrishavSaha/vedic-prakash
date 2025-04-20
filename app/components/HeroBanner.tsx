@@ -11,7 +11,7 @@ export default function HeroBanner() {
 
     useEffect(() => {
         setIsClient(true); 
-    }, [])
+    })
 
     const handleSmoothScroll = (e: React.MouseEvent<HTMLDivElement>, targetId: string) => {
         e.preventDefault();
