@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from "react"
 import { AnimatePresence } from "framer-motion";
-import {useMediaQuery} from "react-responsive";
+import { useMediaQuery } from "react-responsive";
 import { PiCaretLeftBold, PiCaretRightBold } from "react-icons/pi";
 
 import { siteData } from "@/types/site-data";
