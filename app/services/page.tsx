@@ -1,4 +1,5 @@
 import Header from "@/app/components/Header"
+import Services from "@/app/components/ServicesSection"
 
 export default function ServicesPage() {
     return (
@@ -9,6 +10,7 @@ export default function ServicesPage() {
                 {name: "Home", url: "/"},
                 {name: "Services", url: "/services"}
             ]}/>
+            <Services />
         </main>
     )
 }
