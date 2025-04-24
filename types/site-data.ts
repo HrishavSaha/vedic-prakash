@@ -5,6 +5,8 @@ import {
     PiYoutubeLogoFill
 } from "react-icons/pi";
 
+export const queryEmail = "hrishav.saha@gmail.com"
+
 export const siteData: SiteData = {
     services: [
         {

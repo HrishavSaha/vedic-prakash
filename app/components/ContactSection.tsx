@@ -1,5 +1,5 @@
-'use client'
-import { useEffect, useState } from 'react';
+"use client"
+import { useState } from 'react';
 import { useForm } from 'react-hook-form'
 import Link from 'next/link';
 import { 
@@ -11,12 +11,34 @@ import {
 import { siteData } from '@/types/site-data';
 
 export default function ContactSection() {
-    const { register, handleSubmit, formState: { errors } } = useForm()
+    const { register, handleSubmit, formState: { errors }, reset } = useForm()
+    const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
     const contactInfo = siteData.contactInfo;
 
-    const onSubmit = (data: any) => {
-        console.log(data)
+    const onSubmit = async (data: any) => {
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+
+            if (!response.ok) {
+                throw new Error('Failed to submit form')
+            }
+
+            setSubmitStatus('success');
+            reset();
+            setTimeout(() => {
+                setSubmitStatus('idle');
+            }, 5000);
+        } catch (error) {
+            console.error('Error creating query record:', error);
+            setSubmitStatus('error');
+        }
     }
 
     return (
@@ -93,6 +115,13 @@ export default function ContactSection() {
                     {/* Right Card */}
                     <div className='bg-white rounded-xl shadow-md overflow-hidden p-8'>
                         <h3 className='text-2xl dont-semibold, text-gray-900 mb-6'>Send Us a Message</h3>
+
+                        {submitStatus === "success" &&
+                        <div
+                        className='mb-6 p-4 bg-green-100 text-green-700 rounded-lg'>
+                            Message sent successfully! We'll get back to you soon.
+                        </div>
+                        }
 
                         <form onSubmit={handleSubmit(onSubmit)} className='space-y-6'>
                             <div>

@@ -8,18 +8,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Card {
-  id      Int    @id @default(autoincrement())
-  title   String
-  content String
-}
-
-model ContactInfo {
+model QueryRecord {
   id        Int      @id @default(autoincrement())
+  name      String
   phone     String
   email     String
-  address   String
-  mapEmbed  String?
+  message   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
