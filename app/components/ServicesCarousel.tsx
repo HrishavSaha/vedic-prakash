@@ -12,6 +12,7 @@ const services = siteData.services
 export default function ServicesCarousel() {
     const [[currentIndex, direction], setCurrentIndex] = useState([0, 0])
     const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+    const [isClient, setIsClient] = useState(false)
 
     const isMobile = useMediaQuery( { maxWidth: 768 } )
     const visibleCards = isMobile ? 1 : 3
@@ -20,6 +21,10 @@ export default function ServicesCarousel() {
     for (let i = 0; i < visibleCards; i++) {
         visibleServices.push(services[(currentIndex + i) % services.length])
     }
+
+    useEffect(() => {
+        setIsClient(true)
+    })
 
     useEffect(() => {
         if (!isMobile) return
@@ -44,6 +49,7 @@ export default function ServicesCarousel() {
         setTimeout(() => setIsAutoPlaying(true), 10000)
     }
 
+    if (!isClient) return null
     return (
         <section className="py-16 bg-gray-50">
             <div className="container mx-auto px-4">

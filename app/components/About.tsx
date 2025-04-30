@@ -59,7 +59,7 @@ export default function About() {
                             className="p-0 h-auto font-medium text-primary"
                             onClick={() =>  setIsExpanded(!isExpanded)
                             }>
-                                {isExpanded ? "Show Less" : "Read More"}
+                                {isExpanded ? "Show Less" : "Show More"}
                             </Button>
                         </div>
                     </div>

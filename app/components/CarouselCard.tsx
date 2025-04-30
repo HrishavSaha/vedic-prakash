@@ -7,10 +7,10 @@ import { CarouselCardProps } from "@/types";
 
 export default function CarouselCard({ service, direction }: CarouselCardProps) {
     const x_drift = 50
-    
+
     return (
         <motion.div
-        key = {service.id}
+        key={service.id}
         custom={direction}
         initial={{
             opacity: 0,
