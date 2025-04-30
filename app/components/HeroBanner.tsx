@@ -46,7 +46,7 @@ export default function HeroBanner() {
             <div className="container px-20 relative z-10 flex h-full w-fit flex-col justify-center items-center gap-8 text-white">
                 <div className="w-full max-w-[500px] md:max-w-[600px]">
                     <Image
-                        src="/images/logo.png"
+                        src="/logo.png"
                         alt="Logo"
                         width={600}
                         height={300}

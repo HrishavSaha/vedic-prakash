@@ -26,16 +26,16 @@ export  default function Navbar() {
     }, [])
 
     return (
-        <nav className="fixed top-0 w-full bg-white shadow-md z-50">
-            <div className="w-full bg-amber-300">
-                <div className="max-w-6xl mx-auto px-4">
-                    <div className="flex justify-between sm:h-11 p-1 md:h-6">
-                        <div className="flex flex-col md:flex-row md:items-center space-x-8">
+        <nav className="fixed top-0 z-50 w-full shadow-md bg-white">
+            <div className="w-full border border-b-gray-600/60">
+                <div className="px-4 mx-auto max-w-6xl">
+                    <div className="flex justify-between p-1 sm:h-11 md:h-6">
+                        <div className="flex flex-col space-x-8 md:flex-row md:items-center">
 
                             {/* Phone Number */}
                             <Link
                             href={`tel:${contactInfo.phone}`}
-                            className="flex flex-row items-center px-3 py-auto rounded-md text-sm font-bold text-gray-700 hover:text-fuchsia-800">
+                            className="flex flex-row items-center px-3 text-sm font-bold rounded-md py-auto text-myblack hover:text-gray-300">
                                 <PiPhoneFill className="text-xl"/>
                                 {contactInfo.phone}
                             </Link>
@@ -43,22 +43,22 @@ export  default function Navbar() {
                             {/* Email ID */}
                             <Link
                             href={`mailto:${contactInfo.email}`}
-                            className="flex flex-row items-center px-3 py-auto rounded-md text-sm font-bold text-gray-700 hover:text-fuchsia-800">
+                            className="flex flex-row items-center px-3 text-sm font-bold rounded-md py-auto text-myblack hover:text-gray-300">
                                 <PiEnvelopeSimpleBold className="text-xl"/>
                                 {contactInfo.email}
                             </Link>
                         </div>
-                        <div className="flex flex-col md:flex-row justify-end md:items-center md:space-x-8">
+                        <div className="flex flex-col justify-end md:flex-row md:items-center md:space-x-8">
 
                             {/* Login/Register */}
                             <Link
                             href={login_register.path}
-                            className="px-3 py-auto rounded-md text-sm font-bold text-gray-700 hover:text-fuchsia-800">
+                            className="px-3 text-sm font-bold rounded-md py-auto text-myblack hover:text-gray-300">
                                 {login_register.name}
                             </Link>
 
                             {/* Socials */}
-                            <div className="flex flex-row justify-end md:items-center space-x-2 pr-2">
+                            <div className="flex flex-row justify-end pr-2 space-x-2 md:items-center">
                                 {socials.map((acc) => {
                                     const Icon = acc.icon
                                     return (
@@ -67,8 +67,8 @@ export  default function Navbar() {
                                     href={acc.link} 
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className={`px-auto py-auto rounded-xl text-gray-700`}>
-                                        <Icon className={`text-xl hover:text-${acc.color}`} />
+                                    className={`rounded-xl px-auto py-auto text-black ${acc.color}`}>
+                                        <Icon className={`text-xl`} />
                                     </Link>
                                 )})}
                             </div>
@@ -76,8 +76,8 @@ export  default function Navbar() {
                     </div>
                 </div>
             </div>
-            <div className="max-w-6xl mx-auto px-4">
-                <div className={`flex h-16 ${
+            <div className="px-4 mx-auto max-w-6xl">
+                <div className={`flex h-20 ${
                         isMobile && isMounted
                         ? 'justify-center'
                         : 'justify-between'
@@ -90,12 +90,12 @@ export  default function Navbar() {
                         : 'flex'
                     }`}>
                         <Image
-                        src="/images/navbar_logo.png"
+                        src="/logo.png"
                         alt="Vedic Prakash"
-                        width={160}
-                        height={60}
+                        width={200}
+                        height={100}
                         priority
-                        className="h-full object-contain"
+                        className="object-contain h-full"
                         />
                     </Link>
 

@@ -23,16 +23,16 @@ export default function Footer() {
     }
 
     return (
-        <footer className="bg-gray-900 text-gray-300 pt-16 pb-8">
-            <div className="container max-w-7xl px-4 mx-auto">
+        <footer className="pt-16 pb-8 text-gray-300 bg-gray-900">
+            <div className="container px-4 mx-auto max-w-7xl">
 
                 {/* Main Footer Columns */}
-                <div className="grid grid-cols-1 pb-4 md:grid:cols-2 lg:grid-cols-4 gap-12 md-12">
+                <div className="grid grid-cols-1 gap-12 pb-4 md:grid:cols-2 lg:grid-cols-4 md-12">
 
                     {/* Column 1: Quote and Socials */}
                     <div className="space-y-6">
                         <blockquote className="text-xl italix">
-                        "Building digital experiences that matter."
+                        "Divine services for the divine being."
                         </blockquote>
                         <div className="flex space-x-4">
                             {socials.map((acc) => {
@@ -43,8 +43,8 @@ export default function Footer() {
                                 href={acc.link} 
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className={`px-auto py-auto rounded-xl text-gray-300`}>
-                                    <Icon className={`text-xl hover:text-${acc.color}`} />
+                                className={`text-gray-300 rounded-xl px-auto py-auto ${acc.color}`}>
+                                    <Icon className={`text-xl`} />
                                 </Link>
                             )})}
                         </div>
@@ -53,10 +53,10 @@ export default function Footer() {
                     {/* Column 2 & 3: Quick Links & Resources */}
                     {footerSections.map((section) => (
                         <div key={section.title}>
-                            <h3 className="text-white text-lg font-semibold mb-4">{section.title}</h3>
+                            <h3 className="mb-4 text-lg font-semibold text-white">{section.title}</h3>
                             <ul className="space-y-2">
                                 {section.footerlinks.map((link) => (
-                                    <li key={link.name}><a href={link.path} className="hover:text-white transition-colors">{link.name}</a></li>
+                                    <li key={link.name}><a href={link.path} className="transition-colors hover:text-white">{link.name}</a></li>
                                 ))}
                             </ul>
                         </div>
@@ -64,8 +64,8 @@ export default function Footer() {
 
                     {/* Column 4: Location Map */}
                     <div>
-                        <h3 className="text-white text-lg font-semibold mb-4">Resources</h3>
-                        <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
+                        <h3 className="mb-4 text-lg font-semibold text-white">Resources</h3>
+                        <div className="overflow-hidden rounded-lg aspect-w-16 aspect-h-9">
                             <iframe
                                 src={contactInfo.mapEmbed}
                                 width="100%"
@@ -81,7 +81,7 @@ export default function Footer() {
                 </div>
 
                 {/* Download Links */}
-                <div className="border-t border-gray-800 pt-4">
+                <div className="pt-4 border-t border-gray-800">
                     <div className="flex flex-wrap gap-20 justify-center">
                         <Link
                             href="/downloads/hi.txt"
@@ -119,7 +119,7 @@ export default function Footer() {
                 </div>
 
                 {/* Copyright */}
-                <div className="border-t border-gray-800 mt-8 pt-4 text-center text-gray-500 text-sm">
+                <div className="pt-4 mt-8 text-sm text-center text-gray-500 border-t border-gray-800">
                     <p>Copyright Vedic Prakash 2025. All Rights Reserved. | Designed by MH Technologies</p>
                 </div>
             </div>

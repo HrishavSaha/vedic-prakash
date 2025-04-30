@@ -11,12 +11,12 @@ export default function About() {
     const about = siteData.about
 
     return (
-        <section className="py-20 bg-gray-50" id="about">
-            <div className="container max-w-6xl px-4 mx-auto">
-                <div className="flex flex-col items-center gap-12 md:flex-row">
+        <section className="py-20" id="about">
+            <div className="container px-4 mx-auto max-w-6xl">
+                <div className="flex flex-col gap-12 items-center md:flex-row">
 
                     {/* Profile Image */}
-                    <div className="relative w-full max-w-md aspect-square rounded-2xl overflow-hidden shadow-xl">
+                    <div className="overflow-hidden relative w-full max-w-md rounded-2xl shadow-xl aspect-square">
                         <Image
                         src="/globe.svg"
                         alt="Sanjiv Tiwari"
@@ -56,7 +56,7 @@ export default function About() {
                             {/* Read More Button */}
                             <Button
                             variant='link'
-                            className="text-primary p-0 h-auto font-medium"
+                            className="p-0 h-auto font-medium text-primary"
                             onClick={() =>  setIsExpanded(!isExpanded)
                             }>
                                 {isExpanded ? "Show Less" : "Read More"}

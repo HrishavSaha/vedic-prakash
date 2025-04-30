@@ -42,50 +42,50 @@ export default function ContactSection() {
     }
 
     return (
-        <section className='py-16 bg-gray-50' id='contact'>
-            <div className='container mx-auto px-4'>
-                <div className='text-center mb-12'>
-                    <h2 className='text-3xl font-bold text-gray-900 mb-2'>Contact Us</h2>
-                    <p className='text-lg text-gray-600 max-w-2xl mx-auto'>
+        <section className='py-16' id='contact'>
+            <div className='container px-4 mx-auto'>
+                <div className='mb-12 text-center'>
+                    <h2 className='mb-2 text-3xl font-bold text-gray-900'>Contact Us</h2>
+                    <p className='mx-auto max-w-2xl text-lg text-gray-600'>
                         Get in touch with our team for any inquiries
                     </p>
                 </div>
 
-                <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
+                <div className='grid grid-cols-1 gap-8 lg:grid-cols-2'>
                     {/* Left Card */}
-                    <div className='bg-white rounded-xl shadow-md overflow-hidden'>
+                    <div className='overflow-hidden bg-white rounded-xl shadow-md'>
                         <div className='p-8'>
-                            <h3 className='text-2xl font-semibold text-gray-900 mb-6'>Our Information</h3>
+                            <h3 className='mb-6 text-2xl font-semibold text-gray-900'>Our Information</h3>
 
                             <div className='space-y-6'>
                                 <div className='flex items-start'>
-                                    <div className='bg-blue-100 p-3 rounded-lg mr-4'>
-                                        <PiPhoneFill className='text-blue-600 w-5 h-5'/>
+                                    <div className='p-3 mr-4 bg-blue-100 rounded-lg'>
+                                        <PiPhoneFill className='w-5 h-5 text-blue-600'/>
                                     </div>
                                     <div>
                                         <h4 className='text-lg font-medium text-gray-900'>Phone</h4>
-                                        <Link href={`tel:${contactInfo.phone}`} className='text-gray-600 hover:text-blue-600 transition-colors'>
+                                        <Link href={`tel:${contactInfo.phone}`} className='text-gray-600 transition-colors hover:text-blue-600'>
                                             {contactInfo.phone}
                                         </Link>
                                     </div>
                                 </div>
                                 <div className='flex items-start'>
-                                    <div className='bg-blue-100 p-3 rounded-lg mr-4'>
-                                        <PiEnvelopeSimpleBold className='text-blue-600 w-5 h-5'/>
+                                    <div className='p-3 mr-4 bg-blue-100 rounded-lg'>
+                                        <PiEnvelopeSimpleBold className='w-5 h-5 text-blue-600'/>
                                     </div>
                                     <div>
                                         <h4 className='text-lg font-medium text-gray-900'>Email</h4>
                                         <Link
                                         href={`mailto:${contactInfo.email}`}
-                                        className='text-gray-600 hover:text-blue-600 transition colors'>
+                                        className='text-gray-600 transition hover:text-blue-600 colors'>
                                         {contactInfo.email}
                                         </Link>
                                     </div>
                                 </div>
 
                                 <div className='flex items-start'>
-                                    <div className='bg-blue-100 p-3 rounded-lg mr-4'>
-                                    <PiMapPinFill className='text-blue-600 w-5 h-5'/>
+                                    <div className='p-3 mr-4 bg-blue-100 rounded-lg'>
+                                    <PiMapPinFill className='w-5 h-5 text-blue-600'/>
                                     </div>
                                     <div>
                                         <h4 className='text-lg font-medium text-gray-900'>Address</h4>
@@ -98,7 +98,7 @@ export default function ContactSection() {
                         </div>
 
                         {/* Google Map Embed */}
-                        <div className='h-64 w-full'>
+                        <div className='w-full h-64'>
                             <iframe
                             src={contactInfo.mapEmbed}
                             width="100%"
@@ -113,29 +113,29 @@ export default function ContactSection() {
                     </div>
 
                     {/* Right Card */}
-                    <div className='bg-white rounded-xl shadow-md overflow-hidden p-8'>
+                    <div className='overflow-hidden p-8 bg-white rounded-xl shadow-md'>
                         <h3 className='text-2xl dont-semibold, text-gray-900 mb-6'>Send Us a Message</h3>
 
                         {submitStatus === "success" &&
                         <div
-                        className='mb-6 p-4 bg-green-100 text-green-700 rounded-lg'>
+                        className='p-4 mb-6 text-green-700 bg-green-100 rounded-lg'>
                             Message sent successfully! We'll get back to you soon.
                         </div>
                         }
 
                         <form onSubmit={handleSubmit(onSubmit)} className='space-y-6'>
                             <div>
-                                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                                <label htmlFor="name" className="block mb-1 text-sm font-medium text-gray-700">
                                     Full Name
                                 </label>
                                 <input
                                 type="text"
                                 id='name'
                                 {...register('name', { required: 'Name is required' })}
-                                className={`w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus: border-blue-500 ${
+                                className={`w-full px-4 py-2 border rounded-lg focus:outline-blue-300 ${
                                     errors.name
                                     ? 'border-red-500'
-                                    : 'border-gray-300'
+                                    : 'border-blue-300'
                                 }`}
                                 />
                                 {errors.name && (
@@ -144,7 +144,7 @@ export default function ContactSection() {
                             </div>
 
                             <div>
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                                <label htmlFor="email" className="block mb-1 text-sm font-medium text-gray-700">
                                     Email Address
                                 </label>
                                 <input
@@ -157,10 +157,10 @@ export default function ContactSection() {
                                         message: "Invalid email address"
                                     }
                                 })}
-                                className={`w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus: border-blue-500 ${
+                                className={`w-full px-4 py-2 border rounded-lg focus:outline-blue-300 ${
                                     errors.email
                                     ? 'border-red-500'
-                                    : 'border-gray-300'
+                                    : 'border-blue-300'
                                 }`}
                                 />
                                 {errors.email && (
@@ -169,29 +169,29 @@ export default function ContactSection() {
                             </div>
 
                             <div>
-                                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                                <label htmlFor="phone" className="block mb-1 text-sm font-medium text-gray-700">
                                     Phone Number
                                 </label>
                                 <input
                                 type="tel"
                                 id='phone'
                                 {...register('phone')}
-                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus: border-blue-500"
+                                className="px-4 py-2 w-full rounded-lg border border-blue-300 focus:outline-blue-300"
                                 />
                             </div>
 
                             <div>
-                                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                                <label htmlFor="message" className="block mb-1 text-sm font-medium text-gray-700">
                                     Your Message
                                 </label>
                                 <textarea
                                 id="message"
                                 rows={4}
                                 {...register('message', { required: "Message is required" })}
-                                className={`w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus: border-blue-500 ${
+                                className={`w-full px-4 py-2 border rounded-lg focus:outline-blue-300 ${
                                     errors.message
                                     ? 'border-red-500'
-                                    : 'border-gray-300'
+                                    : 'border-blue-300'
                                 }`}
                                 ></textarea>
                                 {errors.message && (
@@ -201,7 +201,7 @@ export default function ContactSection() {
 
                             <button
                             type='submit'
-                            className='w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors font-medium'
+                            className='px-4 py-3 w-full font-medium text-white bg-blue-600 rounded-lg transition-colors hover:bg-blue-700'
                             >
                                 Send Message
                             </button>

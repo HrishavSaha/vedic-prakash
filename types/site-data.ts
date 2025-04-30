@@ -36,21 +36,21 @@ export const siteData: SiteData = {
             id:1,
             name: "Facebook",
             link: "https://facebook.com",
-            color: "blue-700",
+            color: "hover:text-blue-700",
             icon: PiFacebookLogoFill
         },
         {
             id:2,
             name: "Instagram",
             link: "https://instagram.com",
-            color: "pink-500",
+            color: "hover:text-pink-500",
             icon: PiInstagramLogoFill
         },
         {
             id:3,
             name: "Youtube",
             link: "https://youtube.com",
-            color: "rose-700",
+            color: "hover:text-rose-700",
             icon: PiYoutubeLogoFill
         }
     ],

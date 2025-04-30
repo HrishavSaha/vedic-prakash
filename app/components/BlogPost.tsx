@@ -27,7 +27,7 @@ export default function BlogPost () {
     }
 
     return (
-        <section className="flex flex-col py-20 bg-gray-50 gap-5" id="blog">
+        <section className="flex flex-col gap-5 py-20" id="blog">
             {blogs.map((blog, index) => (
                 <div
                 key={index}
@@ -38,7 +38,7 @@ export default function BlogPost () {
                 }`}>
                     <div className="flex">
                         <Button
-                        className="bg-transparent w-full flex justify-start shadow-none hover:bg-transparent text-black text-6xl p-0"
+                        className="flex justify-start p-0 w-full text-6xl text-black bg-transparent shadow-none hover:bg-transparent"
                         onClick={() => handleClick(index)}
                         >
                             {isExpanded && currentBlog == index && isClient ? 
@@ -54,7 +54,7 @@ export default function BlogPost () {
                         ? "max-h-[200px] overflow-auto"
                         : "max-h-0 overflow-hidden"
                     }`}>
-                        <p className="text-gray-500 text-xl">
+                        <p className="text-xl text-gray-500">
                             {blog.content}
                         </p>
                     </div>
